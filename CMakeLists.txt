@@ -21,6 +21,31 @@ if(NOT CMAKE_BUILD_TARGET)
     set(CMAKE_BUILD_TARGET "Both" CACHE STRING "" FORCE)
 endif()
 
+#if(WIN32)
+#
+#find_library(LIBUSB_LIBRARIES usb-1.0
+#PATHS /opt/local/lib)
+#
+#find_path(LIBUSB_INCLUDE_DIR libusb-1.0/libusb.h
+#PATHS /opt/local/include)
+#else()
+#find_package(PkgConfig)
+#pkg_check_modules(LIBUSB libusb-1.0)
+#endif()
+
+
+#if(WIN32)
+#find_library(PTHREAD_LIBRARIES pthreadVC2
+#PATHS D:/install/pthreads-w32-2-9-1-release/lib/x64)
+#find_path(PTHREAD_INCLUDE_DIR pthread.h
+#PATHS D:/install/pthreads-w32-2-9-1-release/include)
+#SET(EXTRA_DEFS "-D_TIMESPEC_DEFINED")
+#add_definitions(${EXTRA_DEFS})
+#else()
+#include(GNUInstallDirs)
+#SET(CMAKE_C_FLAGS_DEBUG "-g  -DUVC_DEBUGGING")
+#endif()
+
 option(BUILD_EXAMPLE "Build example program" ON)
 option(BUILD_TEST "Build test program" OFF)
 option(ENABLE_UVC_DEBUGGING "Enable UVC debugging" OFF)
@@ -50,6 +75,13 @@ if(JPEG_FOUND)
 else()
   message(WARNING "JPEG not found. libuvc will not support JPEG decoding.")
 endif()
+
+#include_directories(
+#${libuvc_SOURCE_DIR}/include
+#${libuvc_BINARY_DIR}/include
+#${LIBUSB_INCLUDE_DIR}
+#${PTHREAD_INCLUDE_DIR}
+#)
 
 if(${CMAKE_BUILD_TARGET} MATCHES "Shared")
   set(BUILD_UVC_SHARED TRUE)

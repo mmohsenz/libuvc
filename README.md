@@ -13,7 +13,7 @@ To build, you can just run these shell commands:
     cd libuvc
     mkdir build
     cd build
-    cmake ..
+    cmake .. 
     make && sudo make install
 
 and you're set! If you want to change the build configuration, you can edit `CMakeCache.txt`
